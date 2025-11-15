@@ -1,85 +1,104 @@
-# sv
+# 📝 Task Monitor
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A simple **Task and Time Tracking** application built with **SvelteKit**, **TypeScript**, **Nhost**, **GraphQL**, and deployed on **Vercel**.
 
-## Creating a project
+---
 
-If you're seeing this, you've probably already done this step. Congrats!
+## 🚀 Live Demo
 
-```sh
-# create a new project in the current directory
-npx sv create
+[Task Monitor Live](https://tast-monitor-oaxv8usev-kotimundlamuri6718-7280s-projects.vercel.app/)  
 
-# create a new project in my-app
-npx sv create my-app
-```
+**Dummy Credentials:**
 
-## Developing
+| Name                 | Password  |
+|----------------------|-----------|
+| Srinivas             | Srinivas  |
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+> Note: These credentials are for testing purposes only.
 
-```sh
-npm run dev
+---
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## 🛠 Technologies Used
 
-## Nhost setup (GraphQL)
+- **Frontend:** SvelteKit, TypeScript, Tailwind CSS  
+- **Backend / Authentication:** Nhost (Auth + Database)  
+- **GraphQL:** Hasura / Nhost GraphQL API  
+- **Deployment:** Vercel  
 
-This project includes a minimal Nhost GraphQL helper at `src/lib/nhostClient.ts` and it is re-exported from `$lib`.
+---
 
-- Put your environment values in a local `.env` file (do not commit secrets). An example is provided in `.env.example`.
-- Frontend (Vite) variables must be prefixed with `VITE_` to be available in the browser.
+## ✨ Features
 
-Example `.env` (local, not committed):
+- ✅ **User Authentication:** Sign up, login, and logout  
+- ✅ **Task Management:** Create, edit, delete, and update task status  
+- ✅ **Time Tracking:** Start and stop timers for tasks  
+- ✅ **Time Logs:** View detailed time logs with duration  
+- ✅ **Daily Summary:** View total time spent on tasks for the day  
+- ✅ **Responsive UI:** Works on desktop and mobile devices  
 
-```powershell
-VITE_NHOST_GRAPHQL_URL="https://your-subdomain.graphql.region.nhost.run/v1"
-VITE_NHOST_AUTH_URL="https://your-subdomain.auth.region.nhost.run/v1"
-```
+---
 
-Quick usage (Svelte/SvelteKit):
+## 📦 Project Structure
 
-```ts
-// import from $lib (re-exported in src/lib/index.ts)
-import { graphql, setToken } from '$lib';
+src/
+├─ routes/ # SvelteKit pages
+├─ lib/
+│ └─ stores/ # Svelte stores (auth, tasks)
+├─ components/ # Reusable UI components
 
-const QUERY = `query GetItems { items { id name } }`;
 
-async function loadItems() {
-	const res = await graphql<{ items: Array<{ id: string; name: string }> }>(QUERY);
-	if (res.errors) {
-		console.error(res.errors);
-		return [];
-	}
-	return res.data?.items ?? [];
-}
+---
 
-// after authenticating via your auth flow, store the JWT so graphql() will include it
-setToken('<JWT from auth>');
-```
+## ⚡ Getting Started
 
-Notes and recommendations:
+### 1️⃣ Clone the repository
 
-- This repository includes a simple fetch-based helper. If you prefer the official SDK, install it and replace the helper:
+git clone https://github.com/Srinivas-Mundlamuri/task-monitor.git
+cd task-monitor
 
-```powershell
-pnpm add @nhost/nhost-js
-# or
-npm install @nhost/nhost-js
-```
+### 2️⃣ Install dependencies
+pnpm install
 
-- Keep admin secrets and the JWT signing secret server-side only. Do not commit them to git.
 
-## Building
+You can also use npm install or yarn install if preferred.
 
-To create a production version of your app:
+### 3️⃣ Configure environment variables
 
-```sh
-npm run build
-```
+Create a .env file from copy of .env.example
 
-You can preview the production build with `npm run preview`.
+### 4️⃣ Run the development server
+pnpm dev
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+Open http://localhost:5173
+ to view your app.
+
+### 5️⃣ Build for production
+pnpm build
+pnpm preview
+
+---
+
+## 📈 Deployment
+
+This project is deployed on Vercel using @sveltejs/adapter-vercel.
+
+To deploy:
+
+Connect your GitHub repo to Vercel.
+
+Set environment variables in Vercel (same as .env above).
+
+Click Deploy.
+
+## 💡 Notes
+
+The time logs handle tasks that span across multiple days.
+
+Duration is automatically calculated and displayed in HH:MM:SS format.
+
+Ensure you use Node.js v20 or v22 for building the project.
+
+## 📝 Author
+
+Srinivas Mundlamuri
